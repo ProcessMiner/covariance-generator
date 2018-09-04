@@ -1,5 +1,7 @@
 # Generate Covariance and Block Covariance Matrix in R
 
+Authors: [Somrita Sarkar](https://www.linkedin.com/in/somrita-sarkar/), [Chitta Ranjan](https://www.linkedin.com/in/chitta-ranjan-b0851911/).
+
 This repository provides implemented codes in R for generation of a covariance and block covariance matrices.
 
 A randomly generated covariance matrix is usually used for simulating random correlated data. The correlation structures are desired to have different characteristics for different problems. The provided functions help generate covariances for most of the problems.
@@ -73,4 +75,4 @@ As can be seen in the above sample output, the blocks sizes are no more than 3 (
 
 ## Support
 
-The code is supported by the Science team at ProcessMiner, Inc. If you have any questions/comments, please leave them here in comments section or email at support@processminer.com.
+The code is supported by the Science team at ProcessMiner, Inc. If you have any questions/comments, please leave them here in the comments section or email at support@processminer.com.
