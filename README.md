@@ -1,6 +1,6 @@
 # Generate Covariance and Block Covariance Matrix in R
 
-Authors: [Somrita Sarkar](https://www.linkedin.com/in/somrita-sarkar/), [Chitta Ranjan](https://www.linkedin.com/in/chitta-ranjan-b0851911/).
+Authors: Somrita Sarkar, [Chitta Ranjan](https://www.linkedin.com/in/chitta-ranjan-b0851911/).
 
 This repository provides implemented codes in R for generation of a covariance and block covariance matrices.
 
