@@ -1,12 +1,14 @@
-# Generate Covariance and Block Covariance Matrix in R
+# Generate Full, Sparse, and Block Covariance Matrix in R
 
 Authors: Somrita Sarkar, [Chitta Ranjan](https://www.linkedin.com/in/chitta-ranjan-b0851911/).
 
-This repository provides implemented codes in R for generation of a covariance and block covariance matrices.
+This repository provides implemented codes in R for generation of a full, sparse, and block covariance matrices.
 
 A randomly generated covariance matrix is usually used for simulating random correlated data. The correlation structures are desired to have different characteristics for different problems. The provided functions help generate covariances for most of the problems.
 
-## Covariance Matrix
+> A **covariance** is a symmetric positive definite matrix.
+
+## Full Covariance Matrix
 
 Using `SimulateCov(p, corrRange, sdRange)` we generate a positive definite covariance matrix.
 
@@ -36,6 +38,34 @@ The inputs to the function are,
 `sdRange`  the range for the standard deviations of the `p` variables. Its range can be (0, infinity).
 
 The function `SimulateCov` works by first randomly generating a correlation matrix and then converts it into a positive definite matrix, which is used at the covariance. The argument `sdRange` is required for this conversion to yield a unique solution. Without defining the `sdRange`, there can be several solutions to the correlation-to-covariance conversion. The `sdRange` becomes the upper and lower limit for the diagonal elements in `covarianceMatrix`.
+
+## Sparse Covariance
+We generate a sparse covariance matrix by just adding a `sparsity` parameter to the `SimulateCov` function.
+
+```
+> sparseCovariance <- SimulateCov(p = 10, 
+                                corrRange = list(min = -0.7, max = 0.9), 
+                                sdRange = list(min = 0.5, max = 0.75),
+                                sparsity = 0.1)
+
+> sparseCovariance
+               [,1]          [,2]        [,3]      [,4]      [,5]          [,6]      [,7]      [,8]          [,9]     [,10]
+ [1,]  4.636766e-01  0.000000e+00  0.43998843 0.0000000 0.0000000 -2.553911e-18 0.0000000 0.0000000 -1.012174e-18 0.0000000
+ [2,]  0.000000e+00  5.432883e-01  0.00000000 0.0000000 0.0000000 -8.846332e-17 0.0000000 0.0000000 -2.804806e-17 0.0000000
+ [3,]  4.399884e-01  0.000000e+00  0.53617202 0.0000000 0.0000000 -7.158354e-02 0.0000000 0.0000000 -2.043421e-02 0.0000000
+ [4,]  0.000000e+00  0.000000e+00  0.00000000 0.4818959 0.0000000  0.000000e+00 0.0000000 0.0000000  0.000000e+00 0.0000000
+ [5,]  0.000000e+00  0.000000e+00  0.00000000 0.0000000 0.3339609  0.000000e+00 0.0000000 0.0000000  0.000000e+00 0.0000000
+ [6,] -2.553911e-18 -8.846332e-17 -0.07158354 0.0000000 0.0000000  5.193895e-01 0.0000000 0.0000000  2.311240e-16 0.0000000
+ [7,]  0.000000e+00  0.000000e+00  0.00000000 0.0000000 0.0000000  0.000000e+00 0.2922367 0.0000000  0.000000e+00 0.0000000
+ [8,]  0.000000e+00  0.000000e+00  0.00000000 0.0000000 0.0000000  0.000000e+00 0.0000000 0.5018156  0.000000e+00 0.0000000
+ [9,] -1.012174e-18 -2.804806e-17 -0.02043421 0.0000000 0.0000000  2.311240e-16 0.0000000 0.0000000  4.699101e-01 0.0000000
+[10,]  0.000000e+00  0.000000e+00  0.00000000 0.0000000 0.0000000  0.000000e+00 0.0000000 0.0000000  0.000000e+00 0.4043639
+
+> print(PlotMatrix(sparseCovariance))
+```
+
+Other than the inputs required for Full Covariance, we have,
+`sparsity`  The sparsity level in covariance. Only up to a fraction, equal to the sparsity, of the covariance matrix will be non-zero (excluding the diagonal). The `sparsity` should be between 0 and 1.
 
 ## Block Covariance
 
@@ -72,6 +102,7 @@ The new inputs in this function are,
 `maxVarsInABlock`  The maximum number of variables allowed in one block.
 
 As can be seen in the above sample output, the blocks sizes are no more than 3 (ranging from 1 to 3). Also, the standard deviations (on the diagonal) are between 0.5 and 0.75.
+
 
 ## Support
 

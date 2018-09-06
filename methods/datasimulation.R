@@ -6,6 +6,11 @@ SimulateRawCorrelation <- function(p, corrRange, sparsity = NULL) {
   R <- R * lower.tri(R) + t(R * lower.tri(R))
   
   if(!is.null(sparsity)) {
+    
+    if(sparsity < -0.0 || sparsity > 1.0) {
+      stop("Sparsity should be between 0 and 1.")
+    }
+    
     for(i in 1:(nrow(R) - 1)) {
       for(j in (i + 1):ncol(R)) {
         if(runif(1) > sparsity) {
