@@ -63,6 +63,7 @@ We generate a sparse covariance matrix by just adding a `sparsity` parameter to 
 
 > print(PlotMatrix(sparseCovariance))
 ```
+![sparse covariance matrix](https://github.com/ProcessMiner/covariance-generator/blob/master/plots/sparse-covariance.jpeg?raw=true "Sparse Covariance")
 
 Other than the inputs required for Full Covariance, we have,
 `sparsity`  The sparsity level in covariance. Only up to a fraction, equal to the sparsity, of the covariance matrix will be non-zero (excluding the diagonal). The `sparsity` should be between 0 and 1.
