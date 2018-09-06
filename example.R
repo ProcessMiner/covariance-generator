@@ -10,6 +10,14 @@ covarianceMatrix <- SimulateCov(p = 5,
 covarianceMatrix
 print(PlotMatrix(covarianceMatrix))
 
+## Generating sparse covariance
+sparseCovariance <- SimulateCov(p = 10, 
+                                corrRange = list(min = -0.7, max = 0.9), 
+                                sdRange = list(min = 0.5, max = 0.75),
+                                sparsity = 0.1)
+sparseCovariance
+print(PlotMatrix(sparseCovariance))
+
 ## Generating Block Covariance
 blockCovariance <- SimulateBlockCovariance(totalVars = 10, 
                                            maxVarsInABlock = 3, 

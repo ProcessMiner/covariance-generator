@@ -1,9 +1,26 @@
-SimulateRawCorrelation <- function(p, corrRange) {
+SimulateRawCorrelation <- function(p, corrRange, sparsity = NULL) {
   # Input
   # p          Number of variables
   # corrRange  list(min, max), the minimum and maximum amount of correlation between -1 and 1.
   R <- matrix(runif(n = p * p, min = corrRange$min, max = corrRange$max), ncol = p)       
   R <- R * lower.tri(R) + t(R * lower.tri(R))
+  
+  if(!is.null(sparsity)) {
+    
+    if(sparsity < -0.0 || sparsity > 1.0) {
+      stop("Sparsity should be between 0 and 1.")
+    }
+    
+    for(i in 1:(nrow(R) - 1)) {
+      for(j in (i + 1):ncol(R)) {
+        if(runif(1) > sparsity) {
+          R[i, j] <- 0
+          R[j, i] <- 0
+        }
+      }
+    }
+  }
+  
   diag(R) <- 1
   return(R)  
 }
@@ -24,7 +41,7 @@ Cor2Cov <- function(cor.mat, sdRange) {
                                 max = sdRange$max)))
 }
 
-SimulateCov <- function(p, corrRange, sdRange) {
+SimulateCov <- function(p, corrRange, sdRange, sparsity = NULL) {
   if(corrRange$min < -1.0 || corrRange$max > 1.0) {
     stop("Improper correlation range.")
   }
@@ -38,7 +55,8 @@ SimulateCov <- function(p, corrRange, sdRange) {
   } else {
     rawCorr <- SimulateRawCorrelation(p = p, 
                                       corrRange = list(min = corrRange$min, 
-                                                       max = corrRange$max)
+                                                       max = corrRange$max),
+                                      sparsity = sparsity
     )
     corr <- NearestPosDef(x = rawCorr, corr = T)
     
