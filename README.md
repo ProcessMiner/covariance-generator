@@ -1,12 +1,12 @@
 # Generate Full, Sparse, and Block Covariance Matrix in R
 
-Authors: Somrita Sarkar, [Chitta Ranjan](https://www.linkedin.com/in/chitta-ranjan-b0851911/).
+Authors: [Chitta Ranjan](https://www.linkedin.com/in/chitta-ranjan-b0851911/) and Somrita Sarkar.
 
 This repository provides implemented codes in R for generation of a full, sparse, and block covariance matrices.
 
 A randomly generated covariance matrix is usually used for simulating random correlated data. The correlation structures are desired to have different characteristics for different problems. The provided functions help generate covariances for most of the problems.
 
-> A **covariance** is a symmetric positive definite matrix.
+> A **covariance** is a positive definite matrix: it’s symmetric and invertible.
 
 ## Full Covariance Matrix
 
